@@ -34,5 +34,17 @@ export default new Router({
       name: "ticket",
       component: () => import("./components/Ticket")
     }
+    ,
+    {
+      path: "/ingresar",
+      name: "ingresar",
+      component: () => import("./components/IngresarOrScan")
+    }
+    ,
+    {
+      path: "/user",
+      name: "user",
+      component: () => import("./components/usuario")
+    }
   ]
 });
