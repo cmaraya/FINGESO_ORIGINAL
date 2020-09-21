@@ -15,6 +15,7 @@ public class Local {
     public String dirección;
     public String nombre;
     public String adminstrador;
+    public String url;
     public int codigo;
     public int IDLocal;
     public int tiempoEstimadoPorPersona;
@@ -73,6 +74,8 @@ public class Local {
     public String getDireccion() { return dirección; }
     public String getNombre() { return nombre; }
     public String getAdminstrador() { return adminstrador; }
+    public String getUrl() { return url; }
+
     public int getCodigo() { return codigo; }
     public int getIDLocal() { return IDLocal; }
     public int getTiempoEstimadoPorPersona() { return tiempoEstimadoPorPersona; }
