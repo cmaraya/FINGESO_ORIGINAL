@@ -52,7 +52,7 @@ public class LocalController {
     @PostMapping("/locales")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
         try {
-            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion(),local.getAdministrador(),local.getCodigo(),local.getIDLocal(),local.getTiempoEstimadoPorPersona(),local.getInicioHorarioAtención(),local.getTerminoHorarioAtención(),local.getMaximoPersonas(),local.getTiempoEsperaMaximo(),local.getCola()));
+            Local _local = localRepository.save(new Local( local.getDireccion(),local.getNombre(),local.getAdministrador(),local.getCodigo(),local.getIDLocal(),local.getTiempoEstimadoPorPersona(),local.getInicioHorarioAtención(),local.getTerminoHorarioAtención(),local.getMaximoPersonas(),local.getTiempoEsperaMaximo(),local.getCola()));
             return new ResponseEntity<>(_local, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

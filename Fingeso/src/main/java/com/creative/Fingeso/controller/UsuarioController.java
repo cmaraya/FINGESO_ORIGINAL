@@ -23,7 +23,7 @@ public class UsuarioController {
         try {
             List<Usuario> usuarios = new ArrayList<Usuario>();
 
-            if (ticket == null)
+            if (ticket == 0)
                 usuarioRepository.findAll().forEach(usuarios::add);
             else
                 usuarioRepository.findByTicket(ticket).forEach(usuarios::add);
@@ -52,7 +52,7 @@ public class UsuarioController {
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         try {
-            Usuario _usuario = usuarioRepository.save(new Usuario(usuario.getNombreUsuario, usuario.getTelefono,usuario.getTicket));
+            Usuario _usuario = usuarioRepository.save(new Usuario( usuario.getTelefono() ,usuario.getNombreUsuario(),usuario.getTicket()));
             return new ResponseEntity<>(_usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -101,7 +101,7 @@ public class UsuarioController {
             if (nombre == null)
                 usuarioRepository.findAll().forEach(usuarios::add);
             else
-                usuarioRepository.findByNombre(nombre).forEach(ususarios::add);
+                usuarioRepository.findByNombre(nombre).forEach(usuarios::add);
 
             if (usuarios.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

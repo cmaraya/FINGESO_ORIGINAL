@@ -25,9 +25,9 @@ public class Local {
     @id
     @NotNull
     //Atributos
-    public String dirección;
+    public String direccion;
     public String nombre;
-    public String adminstrador;
+    public String administrador;
     public String url;
     private static final String QR_CODE_IMAGE_PATH = "./MyQRCode.png";
     public int codigo;
@@ -43,7 +43,7 @@ public class Local {
     /**
      * Constructor de Local
      */
-    public Local(int tiempoEstimadoPorPersona,int InicioHorarioAtención, int TerminoHorarioAtención,String dirección, String nombre, String adminstrador) {
+    public Local(int tiempoEstimadoPorPersona,int InicioHorarioAtención, int TerminoHorarioAtención,String direccion, String nombre, String administrador) {
 
         Random cM = new Random();
         int calculoMaximo = cM.nextInt(10);
@@ -72,7 +72,7 @@ public class Local {
      */
     public void setDireccion(String dire){ this.dirección = dire; }
     public void setNombre(String nom){ this.nombre = nom; }
-    public void setAdminstrador(String ad){ this.adminstrador = ad; }
+    public void setAdministrador(String ad){ this.administrador = ad; }
     public void setCodigo(int cod) { this.codigo = cod; }
     public void setIDLocal(int IDLoc) { this.IDLocal = IDLoc; }
     public void setTiempoEstimadoPorPersona(int tiempoEstPersona) { this.tiempoEstimadoPorPersona = tiempoEstPersona; }
@@ -85,9 +85,9 @@ public class Local {
     /**
      * GETTERS
      */
-    public String getDireccion() { return dirección; }
+    public String getDireccion() { return direccion; }
     public String getNombre() { return nombre; }
-    public String getAdminstrador() { return adminstrador; }
+    public String getAdministrador() { return administrador; }
     public String getUrl() { return url; }
 
     public int getCodigo() { return codigo; }
