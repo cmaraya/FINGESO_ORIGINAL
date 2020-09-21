@@ -15,7 +15,7 @@ import java.util.List;
 public interface LocalRepository extends MongoRepository<Local, String> {
 
     //Algunas busquedas
-    List<Local> findByDireccionContaining(String direccion);
-    List<Local> findByNombre(String nombre);
+    List<Local> findByTiempoRestante(int tiempoRestante);
+    List<Local> findByTelefono(int telefono);
 
 }

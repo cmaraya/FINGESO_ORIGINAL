@@ -16,31 +16,31 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class ColaController {
     @Autowired
-    ColaRepository localRepository;
+    ColaRepository colaRepository;
 
-    @GetMapping("/cola")
-    public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
+    @GetMapping("/colas")
+    public ResponseEntity<List<Cola>> getAllCola(@RequestParam(required = false) String usuariosCola) {
         try {
-            List<Local> locales = new ArrayList<Local>();
+            List<Cola> colas = new ArrayList<Cola>();
 
-            if (direccion == null)
-                localRepository.findAll().forEach(locales::add);
+            if (usuariosCola == null)
+                colaRepository.findAll().forEach(colas::add);
             else
-                localRepository.findByDireccionContaining(direccion).forEach(locales::add);
+                colaRepository.findByUsuariosCola(usuariosCola).forEach(colas::add);
 
-            if (locales.isEmpty()) {
+            if (colas.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(locales, HttpStatus.OK);
+            return new ResponseEntity<>(colas, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
-        Optional<Local> localData = localRepository.findById(id);
+    @GetMapping("/colas/{id}")
+    public ResponseEntity<Cola> getColaById(@PathVariable("id") String id) {
+        Optional<Cola> localData = colaRepository.findById(id);
 
         if (localData.isPresent()) {
             return new ResponseEntity<>(localData.get(), HttpStatus.OK);
@@ -49,68 +49,50 @@ public class ColaController {
         }
     }
 
-    @PostMapping("/locales")
-    public ResponseEntity<Local> createLocal(@RequestBody Local local) {
+    @PostMapping("/colas")
+    public ResponseEntity<Cola> createCola(@RequestBody Cola cola) {
         try {
-            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion()));
-            return new ResponseEntity<>(_local, HttpStatus.CREATED);
+            Cola _cola = colaRepository.save(new Cola(cola.setTamanoMaximo(), cola.setTiempoPorUsuario(),cola.setContador()));
+            return new ResponseEntity<>(_cola, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/localess/{id}")
-    public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
-        Optional<Local> localData = localRepository.findById(id);
+    @PutMapping("/colas/{id}")
+    public ResponseEntity<Cola> updateCola(@PathVariable("id") String id, @RequestBody Cola cola) {
+        Optional<Cola> localData = colaRepository.findById(id);
 
         if (localData.isPresent()) {
-            Local _local = localData.get();
-            _local.setNombre(local.getNombre());
-            _local.setDireccion(local.getDireccion());
-            return new ResponseEntity<>(localRepository.save(_local), HttpStatus.OK);
+            Cola _cola = localData.get();
+            _cola.setTamanoMaximo(cola.getTamanoMaximo());
+            _cola.setTiempoPorUsuario(cola.getTiempoPorUsuario());
+            _cola.setContador(cola.getContador());
+            return new ResponseEntity<>(colaRepository.save(_cola), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/locales/{id}")
-    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
+    @DeleteMapping("/colas/{id}")
+    public ResponseEntity<HttpStatus> deleteCola(@PathVariable("id") String id) {
         try {
-            localRepository.deleteById(id);
+            colaRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/locales")
-    public ResponseEntity<HttpStatus> deleteAllLocales() {
+    @DeleteMapping("/cola")
+    public ResponseEntity<HttpStatus> deleteAllColas() {
         try {
-            localRepository.deleteAll();
+            colaRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/nombre")
-    public ResponseEntity<List<Local>> findByNombre(@RequestParam(required = false) String nombre) {
-        try {
-            List<Local> locales = new ArrayList<Local>();
-
-            if (nombre == null)
-                localRepository.findAll().forEach(locales::add);
-            else
-                localRepository.findByNombre(nombre).forEach(locales::add);
-
-            if (locales.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(locales, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }

@@ -1,7 +1,7 @@
 package com.creative.Fingeso.controller;
 
-import com.creative.Fingeso.document.Local;
-import com.creative.Fingeso.repository.LocalRepository;
+import com.creative.Fingeso.document.ARegulado;
+import com.creative.Fingeso.repository.AReguladoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class LocalController {
+public class AReguladoController {
     @Autowired
-    LocalRepository localRepository;
+    AReguladoRepository localRepository;
 
     @GetMapping("/AvisosRegulados")
     public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {

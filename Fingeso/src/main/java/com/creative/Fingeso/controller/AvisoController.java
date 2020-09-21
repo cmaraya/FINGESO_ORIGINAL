@@ -1,7 +1,7 @@
 package com.creative.Fingeso.controller;
 
-import com.creative.Fingeso.document.Local;
-import com.creative.Fingeso.repository.LocalRepository;
+import com.creative.Fingeso.document.Aviso;
+import com.creative.Fingeso.repository.AvisoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,33 +14,33 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class LocalController {
+AvisoController {
     @Autowired
-    LocalRepository localRepository;
+    AvisoRepository avisoRepository;
 
-    @GetMapping("/locales")
-    public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
+    @GetMapping("/avisos")
+    public ResponseEntity<List<Aviso>> getAllAviso(@RequestParam(required = false) int tiempoRestante) {
         try {
-            List<Local> locales = new ArrayList<Local>();
+            List<Aviso> avisos = new ArrayList<Aviso>();
 
-            if (direccion == null)
-                localRepository.findAll().forEach(locales::add);
+            if (tiempoRestante == null)
+                avisoRepository.findAll().forEach(avisos::add);
             else
-                localRepository.findByDireccionContaining(direccion).forEach(locales::add);
+                avisoRepository.findByTiempoRestante(tiempoRestante).forEach(avisos::add);
 
-            if (locales.isEmpty()) {
+            if (avisos.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(locales, HttpStatus.OK);
+            return new ResponseEntity<>(avisos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
-        Optional<Local> localData = localRepository.findById(id);
+    @GetMapping("/avisos/{id}")
+    public ResponseEntity<Aviso> getAvisoById(@PathVariable("id") String id) {
+        Optional<Aviso> localData = avisoRepository.findById(id);
 
         if (localData.isPresent()) {
             return new ResponseEntity<>(localData.get(), HttpStatus.OK);
@@ -49,65 +49,67 @@ public class LocalController {
         }
     }
 
-    @PostMapping("/locales")
-    public ResponseEntity<Local> createLocal(@RequestBody Local local) {
+    @PostMapping("/avisos")
+    public ResponseEntity<Aviso> createAviso(@RequestBody Aviso aviso) {
         try {
-            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion()));
-            return new ResponseEntity<>(_local, HttpStatus.CREATED);
+        Aviso _aviso = avisoRepository.save(new Aviso(aviso.getTelefono(), aviso.getTiempoRestante(),aviso.getComunicado()));
+            return new ResponseEntity<>(_aviso, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/localess/{id}")
-    public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
-        Optional<Local> localData = localRepository.findById(id);
+    @PutMapping("/avisos/{id}")
+    public ResponseEntity<Aviso> updateAviso(@PathVariable("id") String id, @RequestBody Aviso aviso) {
+        Optional<Aviso> localData = avisoRepository.findById(id);
 
         if (localData.isPresent()) {
-            Local _local = localData.get();
-            _local.setNombre(local.getNombre());
-            _local.setDireccion(local.getDireccion());
-            return new ResponseEntity<>(localRepository.save(_local), HttpStatus.OK);
+        Aviso _aviso = localData.get();
+        _aviso.setTelefono(aviso.getTelefono());
+        _aviso.setTiempoRestante(aviso.getTiempoRestante());
+        _aviso.setComunicado(aviso.getComunicado());
+
+            return new ResponseEntity<>(avisoRepository.save(_aviso), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/locales/{id}")
-    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
+    @DeleteMapping("/avisos/{id}")
+    public ResponseEntity<HttpStatus> deleteAviso(@PathVariable("id") String id) {
         try {
-            localRepository.deleteById(id);
+            avisoRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/locales")
-    public ResponseEntity<HttpStatus> deleteAllLocales() {
+    @DeleteMapping("/avisos")
+    public ResponseEntity<HttpStatus> deleteAllAvisos() {
         try {
-            localRepository.deleteAll();
+            avisoRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/nombre")
-    public ResponseEntity<List<Local>> findByNombre(@RequestParam(required = false) String nombre) {
+    @GetMapping("/avisos/telefono")
+    public ResponseEntity<List<Aviso>> findByNombre(@RequestParam(required = false) int telefono) {
         try {
-            List<Local> locales = new ArrayList<Local>();
+            List<Aviso> avisos = new ArrayList<Aviso>();
 
-            if (nombre == null)
-                localRepository.findAll().forEach(locales::add);
+            if (telefono == null)
+                avisoRepository.findAll().forEach(avisos::add);
             else
-                localRepository.findByNombre(nombre).forEach(locales::add);
+                avisoRepository.findByTelefono(telefono).forEach(avisos::add);
 
-            if (locales.isEmpty()) {
+            if (avisos.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(locales, HttpStatus.OK);
+            return new ResponseEntity<>(avisos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

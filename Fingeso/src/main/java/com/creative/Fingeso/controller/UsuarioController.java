@@ -23,10 +23,10 @@ public class UsuarioController {
         try {
             List<Usuario> usuarios = new ArrayList<Usuario>();
 
-            if (direccion == null)
+            if (ticket == null)
                 usuarioRepository.findAll().forEach(usuarios::add);
             else
-                usuarioRepository.findByDireccionContaining(ticket).forEach(usuarios::add);
+                usuarioRepository.findByTicket(ticket).forEach(usuarios::add);
 
             if (usuarios.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
