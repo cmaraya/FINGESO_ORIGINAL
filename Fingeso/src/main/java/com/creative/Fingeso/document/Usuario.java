@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 @Document(collection = "Usuario")
 public class Usuario {
-    @id
-    @NotNull
+
+    public int id;
     public int telefono;
     public String nombre;
     public int ticket;
@@ -17,8 +17,9 @@ public class Usuario {
     /**
      * Constructor de Usuario
      */
-    public Usuario(int telefono,String nombre, int ticket){
+    public Usuario(int id , int telefono , String nombre , int ticket){
 
+        this.id = id;
         this.telefono=telefono;
         this.nombre=nombre;
         this.ticket=0;
@@ -34,6 +35,7 @@ public class Usuario {
     /**
      *GETTERS
      */
+    public int getId() {return id;}
     public String getNombreUsuario() { return nombre; }
     public int getTelefono() { return telefono; }
     public int getTicket() { return ticket; }
@@ -42,9 +44,8 @@ public class Usuario {
      *METODOS
      */
 
-    public Usuario solicitarIngresoCola (){
-        Usuario user = local.solicitarIngresoCola(get.nombre(),get.telefono());
-        return user;
+    public Usuario solicitarIngresoCola (Local local){
+        return local.solicitarIngresoCola(this.getNombreUsuario(),this.getTelefono());
     }
 
 

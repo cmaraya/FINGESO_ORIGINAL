@@ -28,9 +28,4 @@ public class AInicial extends Aviso{
         " Cantidad de personas en la cola\n" + personas +
         '\n';
     }
-
-
-
-
-
 }

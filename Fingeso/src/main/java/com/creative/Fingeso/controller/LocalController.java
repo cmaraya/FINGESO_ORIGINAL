@@ -52,7 +52,7 @@ public class LocalController {
     @PostMapping("/locales")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
         try {
-            Local _local = localRepository.save(new Local( local.getDireccion(),local.getNombre(),local.getAdministrador(),local.getCodigo(),local.getIDLocal(),local.getTiempoEstimadoPorPersona(),local.getInicioHorarioAtención(),local.getTerminoHorarioAtención(),local.getMaximoPersonas(),local.getTiempoEsperaMaximo(),local.getCola()));
+            Local _local = localRepository.save(new Local( local.getDireccion(),local.getNombre(),local.getAdministrador(),local.getCodigo(),local.getIDLocal(),local.getTiempoEstimadoPorPersona(),local.getInicioHorarioAtencion(),local.getTerminoHorarioAtencion(),local.getMaximoPersonas(),local.getTiempoEsperaMaximo(),local.getCola()));
             return new ResponseEntity<>(_local, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,12 +67,12 @@ public class LocalController {
             Local _local = localData.get();
             _local.setNombre(local.getNombre());
             _local.setDireccion(local.getDireccion());
-            _local.setAministrador(local.getAdministrador());
+            _local.setAdministrador(local.getAdministrador());
             _local.setCodigo(local.getCodigo());
             _local.setIDLocal(local.getIDLocal());
             _local.setTiempoEstimadoPorPersona(local.getTiempoEstimadoPorPersona());
-            _local.setInicioHorarioAtención(local.getInicioHorarioAtención());
-            _local.setTiempoEstimadoPorPersona(local.getTerminoHorarioAtención());
+            _local.setInicioHorarioAtencion(local.getInicioHorarioAtencion());
+            _local.setTiempoEstimadoPorPersona(local.getTerminoHorarioAtencion());
             _local.setMaximoPersonas(local.getMaximoPersonas());
             _local.setTiempoEsperaMaximo(local.getTiempoEsperaMaximo());
             _local.setCola(local.getCola());

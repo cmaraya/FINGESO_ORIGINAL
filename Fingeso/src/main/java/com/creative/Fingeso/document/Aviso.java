@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 @Document(collection = "Aviso")
 public class Aviso {
-    @id
-    @NotNull
     public int telefono;
     public  int tiempoRestante;/**tiempo considerados en minutos, que luego sera transformado a su formato de salida**/
     public String comunicado;

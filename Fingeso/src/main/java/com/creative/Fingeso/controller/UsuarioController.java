@@ -52,7 +52,7 @@ public class UsuarioController {
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         try {
-            Usuario _usuario = usuarioRepository.save(new Usuario( usuario.getTelefono() ,usuario.getNombreUsuario(),usuario.getTicket()));
+            Usuario _usuario = usuarioRepository.save(new Usuario(usuario.getId() , usuario.getTelefono() ,usuario.getNombreUsuario(),usuario.getTicket()));
             return new ResponseEntity<>(_usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

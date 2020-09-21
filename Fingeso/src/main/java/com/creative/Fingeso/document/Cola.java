@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 @Document(collection = "Cola")
 public class Cola {
-    @id
-    @NotNull
+
+    public int id;
     public ArrayList<Usuario> usuariosCola;
     public int tamanoMaximo;
     public int tiempoPorUsuario;
