@@ -18,7 +18,7 @@ public class LocalController {
     @Autowired
     LocalRepository localRepository;
 
-    @GetMapping("/locales")
+    @GetMapping("/AvisosRegulados")
     public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
         try {
             List<Local> locales = new ArrayList<Local>();
@@ -38,7 +38,7 @@ public class LocalController {
         }
     }
 
-    @GetMapping("/locales/{id}")
+    @GetMapping("/AvisosRegulados/{id}")
     public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
         Optional<Local> localData = localRepository.findById(id);
 
@@ -49,7 +49,7 @@ public class LocalController {
         }
     }
 
-    @PostMapping("/locales")
+    @PostMapping("/AvisosRegulados")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
         try {
             Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion()));
@@ -59,7 +59,7 @@ public class LocalController {
         }
     }
 
-    @PutMapping("/localess/{id}")
+    @PutMapping("/AvisosRegulados/{id}")
     public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
         Optional<Local> localData = localRepository.findById(id);
 
@@ -73,7 +73,7 @@ public class LocalController {
         }
     }
 
-    @DeleteMapping("/locales/{id}")
+    @DeleteMapping("/AvisosRegulados/{id}")
     public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
         try {
             localRepository.deleteById(id);
@@ -83,7 +83,7 @@ public class LocalController {
         }
     }
 
-    @DeleteMapping("/locales")
+    @DeleteMapping("/AvisosRegulados")
     public ResponseEntity<HttpStatus> deleteAllLocales() {
         try {
             localRepository.deleteAll();
@@ -93,7 +93,7 @@ public class LocalController {
         }
     }
 
-    @GetMapping("/locales/nombre")
+    @GetMapping("/AvisosRegulados/nombre")
     public ResponseEntity<List<Local>> findByNombre(@RequestParam(required = false) String nombre) {
         try {
             List<Local> locales = new ArrayList<Local>();
