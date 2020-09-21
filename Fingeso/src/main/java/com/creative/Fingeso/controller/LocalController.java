@@ -39,7 +39,7 @@ public class LocalController {
     }
 
     @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") int id) {
+    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
         Optional<Local> localData = localRepository.findById(id);
 
         if (localData.isPresent()) {
@@ -60,7 +60,7 @@ public class LocalController {
     }
 
     @PutMapping("/localess/{id}")
-    public ResponseEntity<Local> updateLocal(@PathVariable("id") int id, @RequestBody Local local) {
+    public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
         Optional<Local> localData = localRepository.findById(id);
 
         if (localData.isPresent()) {
@@ -83,7 +83,7 @@ public class LocalController {
     }
 
     @DeleteMapping("/locales/{id}")
-    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") int id) {
+    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
         try {
             localRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

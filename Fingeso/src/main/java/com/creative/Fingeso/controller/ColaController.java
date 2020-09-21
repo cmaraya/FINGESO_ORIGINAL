@@ -18,7 +18,7 @@ public class ColaController {
     @Autowired
     ColaRepository localRepository;
 
-    /*@GetMapping("/colas")
+    @GetMapping("/cola")
     public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
         try {
             List<Local> locales = new ArrayList<Local>();
@@ -36,18 +36,18 @@ public class ColaController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
-    //**@GetMapping("/locales/{id}")
-    //public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
-      //  Optional<Local> localData = localRepository.findById(id);
+    @GetMapping("/locales/{id}")
+    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
+        Optional<Local> localData = localRepository.findById(id);
 
-        //if (localData.isPresent()) {
-          //  return new ResponseEntity<>(localData.get(), HttpStatus.OK);
-        //} else {
-          //  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        //}
-    //}
+        if (localData.isPresent()) {
+            return new ResponseEntity<>(localData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping("/locales")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
