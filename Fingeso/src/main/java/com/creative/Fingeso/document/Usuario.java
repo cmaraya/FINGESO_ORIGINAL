@@ -42,6 +42,9 @@ public class Usuario {
      *METODOS
      */
 
-
+    public Usuario solicitarIngresoCola (){
+        Usuario user = local.solicitarIngresoCola(get.nombre(),get.telefono());
+        return user;
+    }
 
 }
