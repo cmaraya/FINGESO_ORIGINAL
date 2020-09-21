@@ -22,5 +22,17 @@ export default new Router({
       name: "add",
       component: () => import("./components/AddLocal")
     }
+	,
+    {
+      path: "/solicitud",
+      name: "solicitud",
+      component: () => import("./components/Solicitud")
+    }
+	,
+    {
+      path: "/ticket",
+      name: "ticket",
+      component: () => import("./components/Ticket")
+    }
   ]
 });
