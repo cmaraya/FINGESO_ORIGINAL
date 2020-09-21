@@ -39,7 +39,7 @@ public class LocalController {
     }
 
     @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
+    public ResponseEntity<Local> getLocalById(@PathVariable("id") int id) {
         Optional<Local> localData = localRepository.findById(id);
 
         if (localData.isPresent()) {
@@ -52,7 +52,7 @@ public class LocalController {
     @PostMapping("/locales")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
         try {
-            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion()));
+            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion(),local.getAdministrador(),local.getCodigo(),local.getIDLocal(),local.getTiempoEstimadoPorPersona(),local.getInicioHorarioAtención(),local.getTerminoHorarioAtención(),local.getMaximoPersonas(),local.getTiempoEsperaMaximo(),local.getCola()));
             return new ResponseEntity<>(_local, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,13 +60,22 @@ public class LocalController {
     }
 
     @PutMapping("/localess/{id}")
-    public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
+    public ResponseEntity<Local> updateLocal(@PathVariable("id") int id, @RequestBody Local local) {
         Optional<Local> localData = localRepository.findById(id);
 
         if (localData.isPresent()) {
             Local _local = localData.get();
             _local.setNombre(local.getNombre());
             _local.setDireccion(local.getDireccion());
+            _local.setAministrador(local.getAdministrador());
+            _local.setCodigo(local.getCodigo());
+            _local.setIDLocal(local.getIDLocal());
+            _local.setTiempoEstimadoPorPersona(local.getTiempoEstimadoPorPersona());
+            _local.setInicioHorarioAtención(local.getInicioHorarioAtención());
+            _local.setTiempoEstimadoPorPersona(local.getTerminoHorarioAtención());
+            _local.setMaximoPersonas(local.getMaximoPersonas());
+            _local.setTiempoEsperaMaximo(local.getTiempoEsperaMaximo());
+            _local.setCola(local.getCola());
             return new ResponseEntity<>(localRepository.save(_local), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -74,7 +83,7 @@ public class LocalController {
     }
 
     @DeleteMapping("/locales/{id}")
-    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") int id) {
         try {
             localRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -1,7 +1,7 @@
 package com.creative.Fingeso.controller;
 
-import com.creative.Fingeso.document.Local;
-import com.creative.Fingeso.repository.LocalRepository;
+import com.creative.Fingeso.document.Usuario;
+import com.creative.Fingeso.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,33 +14,33 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class LocalController {
+public class UsuarioController {
     @Autowired
-    LocalRepository localRepository;
+    UsuarioRepository usuarioRepository;
 
-    @GetMapping("/locales")
-    public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> getAllUsuario(@RequestParam(required = false) int ticket) {
         try {
-            List<Local> locales = new ArrayList<Local>();
+            List<Usuario> usuarios = new ArrayList<Usuario>();
 
             if (direccion == null)
-                localRepository.findAll().forEach(locales::add);
+                usuarioRepository.findAll().forEach(usuarios::add);
             else
-                localRepository.findByDireccionContaining(direccion).forEach(locales::add);
+                usuarioRepository.findByDireccionContaining(ticket).forEach(usuarios::add);
 
-            if (locales.isEmpty()) {
+            if (usuarios.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(locales, HttpStatus.OK);
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
-        Optional<Local> localData = localRepository.findById(id);
+    @GetMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("id") String id) {
+        Optional<Usuario> localData = usuarioRepository.findById(id);
 
         if (localData.isPresent()) {
             return new ResponseEntity<>(localData.get(), HttpStatus.OK);
@@ -49,65 +49,65 @@ public class LocalController {
         }
     }
 
-    @PostMapping("/locales")
-    public ResponseEntity<Local> createLocal(@RequestBody Local local) {
+    @PostMapping("/usuarios")
+    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         try {
-            Local _local = localRepository.save(new Local(local.getNombre(), local.getDireccion()));
-            return new ResponseEntity<>(_local, HttpStatus.CREATED);
+            Usuario _usuario = usuarioRepository.save(new Usuario(usuario.getNombreUsuario, usuario.getTelefono,usuario.getTicket));
+            return new ResponseEntity<>(_usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/localess/{id}")
-    public ResponseEntity<Local> updateLocal(@PathVariable("id") String id, @RequestBody Local local) {
-        Optional<Local> localData = localRepository.findById(id);
-
+    @PutMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable("id") String id, @RequestBody Usuario usuario) {
+        Optional<Usuario> localData = usuarioRepository.findById(id);
         if (localData.isPresent()) {
-            Local _local = localData.get();
-            _local.setNombre(local.getNombre());
-            _local.setDireccion(local.getDireccion());
-            return new ResponseEntity<>(localRepository.save(_local), HttpStatus.OK);
+            Usuario _usuario = localData.get();
+            _usuario.setNombreUsuario(usuario.getNombreUsuario());
+            _usuario.setTelefono(usuario.getTelefono());
+            _usuario.setTicket(usuario.getTicket());
+            return new ResponseEntity<>(usuarioRepository.save(_usuario), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/locales/{id}")
-    public ResponseEntity<HttpStatus> deleteLocal(@PathVariable("id") String id) {
+    @DeleteMapping("/usuarios/{id}")
+    public ResponseEntity<HttpStatus> deleteUsuario(@PathVariable("id") String id) {
         try {
-            localRepository.deleteById(id);
+            usuarioRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/locales")
-    public ResponseEntity<HttpStatus> deleteAllLocales() {
+    @DeleteMapping("/usuarios")
+    public ResponseEntity<HttpStatus> deleteAllUsuario() {
         try {
-            localRepository.deleteAll();
+            usuarioRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/locales/nombre")
-    public ResponseEntity<List<Local>> findByNombre(@RequestParam(required = false) String nombre) {
+    @GetMapping("/usuarios/nombre")
+    public ResponseEntity<List<Usuario>> findByNombre(@RequestParam(required = false) String nombre) {
         try {
-            List<Local> locales = new ArrayList<Local>();
+            List<Usuario> usuarios = new ArrayList<Usuario>();
 
             if (nombre == null)
-                localRepository.findAll().forEach(locales::add);
+                usuarioRepository.findAll().forEach(usuarios::add);
             else
-                localRepository.findByNombre(nombre).forEach(locales::add);
+                usuarioRepository.findByNombre(nombre).forEach(ususarios::add);
 
-            if (locales.isEmpty()) {
+            if (usuarios.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(locales, HttpStatus.OK);
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

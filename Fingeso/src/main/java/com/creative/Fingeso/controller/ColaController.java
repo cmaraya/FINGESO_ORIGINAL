@@ -1,7 +1,7 @@
 package com.creative.Fingeso.controller;
 
-import com.creative.Fingeso.document.Local;
-import com.creative.Fingeso.repository.LocalRepository;
+import com.creative.Fingeso.document.Cola;
+import com.creative.Fingeso.repository.ColaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class LocalController {
+public class ColaController {
     @Autowired
-    LocalRepository localRepository;
+    ColaRepository localRepository;
 
-    @GetMapping("/locales")
+    /*@GetMapping("/colas")
     public ResponseEntity<List<Local>> getAllLocal(@RequestParam(required = false) String direccion) {
         try {
             List<Local> locales = new ArrayList<Local>();
@@ -36,18 +36,18 @@ public class LocalController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
-    @GetMapping("/locales/{id}")
-    public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
-        Optional<Local> localData = localRepository.findById(id);
+    //**@GetMapping("/locales/{id}")
+    //public ResponseEntity<Local> getLocalById(@PathVariable("id") String id) {
+      //  Optional<Local> localData = localRepository.findById(id);
 
-        if (localData.isPresent()) {
-            return new ResponseEntity<>(localData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+        //if (localData.isPresent()) {
+          //  return new ResponseEntity<>(localData.get(), HttpStatus.OK);
+        //} else {
+          //  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        //}
+    //}
 
     @PostMapping("/locales")
     public ResponseEntity<Local> createLocal(@RequestBody Local local) {
