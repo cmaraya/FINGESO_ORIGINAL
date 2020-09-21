@@ -14,6 +14,7 @@
           v-model="currentLocal.direccion"
         />
       </div>
+	</form>
 
     <button class="badge badge-danger mr-2"
       @click="deleteLocal"
