@@ -1,6 +1,6 @@
 package com.creative.Fingeso.repository;
 
-import com.creative.Fingeso.document.Local;
+import com.creative.Fingeso.document.Aviso;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @Repository
 @CrossOrigin(value = {})
-public interface LocalRepository extends MongoRepository<Local, String> {
+public interface LocalRepository extends MongoRepository<Aviso, String> {
 
     //Algunas busquedas
-    List<Local> findByTiempoRestante(int tiempoRestante);
-    List<Local> findByTelefono(int telefono);
+    List<Aviso> findByTiempoRestante(int tiempoRestante);
+    List<Aviso> findByTelefono(int telefono);
 
 }
