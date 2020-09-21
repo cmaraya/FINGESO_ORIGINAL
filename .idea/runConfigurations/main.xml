@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="main" type="Java Scratch" singleton="false">
+    <module name="demo" />
+    <option name="SCRATCH_FILE_URL" value="file://$PROJECT_DIR$/Fingeso/src/test/java/com/creative/Fingeso/FingesoApplicationTests.java" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
