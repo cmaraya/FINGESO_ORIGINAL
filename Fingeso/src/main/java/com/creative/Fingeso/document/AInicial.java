@@ -1,5 +1,13 @@
-package sample;
+package com.creative.Fingeso.document;
 
+import java.util.Random;
+import com.sun.istack.internal.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.io.Serializable;
+
+
+@Document(collection = "AInical")
 public class AInicial extends Aviso{
 
     public int personasRestantes;

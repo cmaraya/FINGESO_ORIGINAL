@@ -1,10 +1,17 @@
-package sample;
+package com.creative.Fingeso.document;
+
 import java.time.format.*;
 import java.util.ArrayList;
+import java.util.Random;
+import com.sun.istack.internal.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.io.Serializable;
 
+@Document(collection = "Aviso")
 public class Aviso {
-
-
+    @id
+    @NotNull
     public int telefono;
     public  int tiempoRestante;/**tiempo considerados en minutos, que luego sera transformado a su formato de salida**/
     public String comunicado;
