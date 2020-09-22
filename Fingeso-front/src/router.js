@@ -46,5 +46,11 @@ export default new Router({
       name: "user",
       component: () => import("./components/usuario")
     }
+    ,
+    {
+      path: "/info",
+      name: "info",
+      component: () => import("./components/InfoTicket")
+    }
   ]
 });
