@@ -13,7 +13,7 @@
 
     <div class="col-md-12">
 		<div class="mt-9 text-center">
-			<a class="active dim-boton btn btn-lg btn-color4 font-weight-bold">
+			<a href="/estado" class="active dim-boton btn btn-lg btn-color4 font-weight-bold">
 				INGRESAR TICKET
 			</a>
 		</div>

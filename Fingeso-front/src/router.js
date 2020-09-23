@@ -23,10 +23,22 @@ export default new Router({
       component: () => import("./components/AddLocal")
     }
 	,
+	{
+      path: "/user",
+      name: "user",
+      component: () => import("./components/usuario")
+    }
+	,
     {
       path: "/solicitud",
       name: "solicitud",
       component: () => import("./components/Solicitud")
+    }
+	,
+	{
+      path: "/infolocal",
+      name: "infolocal",
+      component: () => import("./components/InfoTicket")
     }
 	,
     {
@@ -40,17 +52,23 @@ export default new Router({
       name: "ingresar",
       component: () => import("./components/IngresarOrScan")
     }
-    ,
+	,
     {
-      path: "/user",
-      name: "user",
-      component: () => import("./components/usuario")
+      path: "/estado",
+      name: "estado",
+      component: () => import("./components/Estado")
     }
-    ,
-    {
-      path: "/info",
-      name: "info",
-      component: () => import("./components/InfoTicket")
+	,
+	{
+      path: "/infolocaldejar",
+      name: "infolocaldejar",
+      component: () => import("./components/InfoTicketDejar")
+    }
+	,
+	{
+      path: "/colaabandonada",
+      name: "colaabandonada",
+      component: () => import("./components/ColaAbandonada")
     }
   ]
 });
